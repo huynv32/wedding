@@ -1,4 +1,4 @@
-# Wedding Landing Page - Van Tien & Huyen Trang
+# Wedding Landing Page - Văn Huy & Ngọc Ánh
 
 Trang web landing page đám cưới được xây dựng với Vue.js, bao gồm đầy đủ các tính năng lazy loading và smooth scrolling.
 

@@ -27,9 +27,9 @@
       <div class="hero-text">
         <div class="welcome-text">Chào mừng đến với</div>
         <h1 class="couple-names script-font">
-          <span class="name-line">Van Tien</span>
+          <span class="name-line">Văn Huy</span>
           <span class="ampersand">&</span>
-          <span class="name-line">Huyen Trang</span>
+          <span class="name-line">Ngọc Ánh</span>
         </h1>
         <div class="divider">
           <svg width="200" height="20" viewBox="0 0 200 20">
@@ -37,7 +37,7 @@
             <circle cx="100" cy="10" r="3" fill="#8b6f5e"/>
           </svg>
         </div>
-        <div class="wedding-date">29 . 01 . 2026</div>
+        <div class="wedding-date">12 . 03 . 2026</div>
         <div class="wedding-subtitle">Chúng mình rất vui được chia sẻ ngày trọng đại này cùng bạn</div>
       </div>
       
@@ -47,7 +47,7 @@
             <div class="photo-overlay"></div>
             <img 
               src="https://images.unsplash.com/photo-1519741497674-611481863552?w=900&h=700&fit=crop" 
-              alt="Van Tien & Huyen Trang"
+              alt="Văn Huy & Ngọc Ánh"
               class="lazy-image"
               @load="onImageLoad"
               loading="lazy"

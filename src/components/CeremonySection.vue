@@ -1,535 +1,282 @@
 <template>
-  <div id="invitation" class="relative" data-aos="fade-up">
-    <div class="relative">
-      <section class="relative bg-white grid pt-[72px] md:pt-[90px] text-center">
-        <div class="text-dark-200 md:mx-auto mx-[15px]">
-          <div class="relative">
-            <div class="invitation-title font-pinyonScript text-[40px] md:text-[48px] leading-[60px] bg-transparent w-full">
-              Trân trọng kính mời
-            </div>
+  <div id="invitation" class="ceremony-root" data-aos="fade-up">
+    <section class="ceremony-section">
+      <div class="ceremony-inner">
+        <!-- Tiêu đề chính -->
+        <h2 class="ceremony-main-title">Sự Kiện Cưới</h2>
+
+        <!-- Mô tả + trang trí kim cương -->
+        <div class="ceremony-subtitle-wrap">
+          <div class="ceremony-diamonds" aria-hidden="true">
+            <span class="ceremony-diamond"></span>
+            <span class="ceremony-diamond"></span>
           </div>
-          
-          <div class="relative">
-            <div class="invitation-description text-base mt-1">
-              Một lời chúc của bạn chắc chắn sẽ làm cho đám cưới của chúng mình có thêm một niềm hạnh phúc!
-            </div>
-          </div>
+          <p class="ceremony-subtitle">
+            Tình yêu đích thực đứng về phía nhau trong những ngày tốt đẹp và sát cánh hơn trong những ngày tồi tệ.
+          </p>
         </div>
-        
-        <!-- Date and time section -->
-        <div class="relative px-[15px] mt-[28px] py-[28px] grid justify-center items-center" style="background: rgb(251, 247, 245); color: rgb(161, 47, 12);">
-          <img 
-            src="/assets/left.png" 
-            class="absolute left-0 top-0 w-[272px] h-[100%] hidden md:block" 
-            loading="lazy"
-            alt="decoration"
+
+        <!-- Hai thẻ sự kiện -->
+        <div class="ceremony-cards">
+          <article
+            v-for="(event, index) in events"
+            :key="index"
+            class="ceremony-card"
           >
-          <img 
-            src="/assets/8.png" 
-            class="absolute right-0 bottom-0 w-[272px] h-[100%] hidden md:block" 
-            loading="lazy"
-            alt="decoration"
-          >
-          
-          <div class="max-w-[1443px] mx-auto">
-            <div class="relative">
-              <div class="invitation-time text-2xl md:text-[32px] leading-[44px] font-prata">
-                17:30, Thứ 4
-              </div>
+            <div class="ceremony-card-photo-wrap">
+              <img
+                :src="event.image"
+                :alt="event.name"
+                class="ceremony-card-photo"
+                loading="lazy"
+              >
             </div>
-            
-            <!-- Date display -->
-            <div class="flex space-x-[20px] md:space-x-[35px] text-[32px] md:text-[56px] items-center h-auto pt-10 pb-[35px]">
-              <div class="relative">
-                <div class="leading-none">{{ invitationDay }}</div>
-              </div>
-              <div class="self-stretch w-[1.66px] bg-[#F4DBCE]"></div>
-              <div class="relative">
-                <div class="leading-none">{{ invitationMonth }}</div>
-              </div>
-              <div class="self-stretch w-[1.66px] bg-[#F4DBCE]"></div>
-              <div class="relative">
-                <div class="leading-none">{{ invitationYear }}</div>
-              </div>
+            <div class="ceremony-card-body">
+              <h3 class="ceremony-card-title">{{ event.name }}</h3>
+              <p class="ceremony-card-time">
+                <span class="ceremony-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </span>
+                {{ event.time }} {{ event.date }}
+              </p>
+              <p class="ceremony-card-location">
+                <span class="ceremony-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </span>
+                {{ event.location }}
+              </p>
             </div>
-          </div>
-          
-          <div class="relative">
-            <div class="invitation-location text-2xl md:text-[32px] leading-[44px] font-prata">
-              Xóm 1 Đoan Kết, TDP Ninh Sơn, Phường Chương Mỹ, Hà Nội
-            </div>
-          </div>
-          
-          <!-- Countdown timer -->
-          <div class="relative mt-6" id="invitation-countdown">
-            <div class="flex justify-center items-center gap-2 md:gap-4 mt-4">
-              <div class="flex flex-col items-center justify-center w-[60px] h-[60px] md:w-[80px] md:h-[80px] rounded-lg" style="background-color: rgb(244, 219, 206);">
-                <span class="text-2xl md:text-3xl font-bold" style="color: rgb(161, 47, 12);">{{ countdown.days }}</span>
-                <span class="text-xs md:text-sm" style="color: rgb(161, 47, 12);">Ngày</span>
-              </div>
-              <span class="text-2xl font-bold" style="color: rgb(161, 47, 12);">:</span>
-              <div class="flex flex-col items-center justify-center w-[60px] h-[60px] md:w-[80px] md:h-[80px] rounded-lg" style="background-color: rgb(244, 219, 206);">
-                <span class="text-2xl md:text-3xl font-bold" style="color: rgb(161, 47, 12);">{{ countdown.hours }}</span>
-                <span class="text-xs md:text-sm" style="color: rgb(161, 47, 12);">Giờ</span>
-              </div>
-              <span class="text-2xl font-bold" style="color: rgb(161, 47, 12);">:</span>
-              <div class="flex flex-col items-center justify-center w-[60px] h-[60px] md:w-[80px] md:h-[80px] rounded-lg" style="background-color: rgb(244, 219, 206);">
-                <span class="text-2xl md:text-3xl font-bold" style="color: rgb(161, 47, 12);">{{ countdown.minutes }}</span>
-                <span class="text-xs md:text-sm" style="color: rgb(161, 47, 12);">Phút</span>
-              </div>
-              <span class="text-2xl font-bold" style="color: rgb(161, 47, 12);">:</span>
-              <div class="flex flex-col items-center justify-center w-[60px] h-[60px] md:w-[80px] md:h-[80px] rounded-lg" style="background-color: rgb(244, 219, 206);">
-                <span class="text-2xl md:text-3xl font-bold" style="color: rgb(161, 47, 12);">{{ countdown.seconds }}</span>
-                <span class="text-xs md:text-sm" style="color: rgb(161, 47, 12);">Giây</span>
-              </div>
-            </div>
-          </div>
+          </article>
         </div>
-        
-        <!-- Sub description and buttons -->
-        <div class="relative">
-          <div class="invitation-subDescription text-base pt-[30px] pb-10 md:pb-[56px] text-dark-200 mx-[15px]">
-            Sự hiện diện của bạn là niềm vinh dự của chúng tôi!
-          </div>
-          
-          <div class="flex md:mb-10 flex-row justify-center items-center gap-2 md:gap-8 px-4 md:px-[15px] pb-10 md:pb-0">
-            <button 
-              class="uppercase rounded-full text-white font-prata text-sm md:text-[18px] min-w-[180px] md:min-w-[250px] p-3 md:p-6" 
-              style="background: rgb(161, 47, 12);"
-              @click="handleSendWish"
-            >
-              Gửi lời chúc
-            </button>
-            <button 
-              id="btn-confirm-attendance" 
-              class="uppercase rounded-full font-prata text-sm md:text-[18px] min-w-[180px] md:min-w-[250px] p-3 md:p-6" 
-              style="background: rgb(244, 219, 206); color: rgb(161, 47, 12);"
-              @click="handleConfirmAttendance"
-            >
-              Xác nhận tham dự
-            </button>
-          </div>
-        </div>
-      </section>
-    </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
+/** Thiệp chú rể (lễ thành hôn): tiệc và lễ thành hôn đều ở Số 1, Ngõ 161 */
+const GROOM_ADDRESS = 'Số 1, Ngõ 161, đường Ô Diên, xã Ô Diên, Hà Nội'
+/** Thiệp cô dâu: Lễ vu quy và Ăn hỏi, Đón dâu ở Số 169 */
+const OTHER_ADDRESS = 'Số 169, Đường Liên Thôn 2, xã Ô Diên, Hà Nội'
+/** Thiệp cô dâu: chỉ tiệc chiều ở Nhà văn hoá */
+const RECEPTION_ADDRESS = 'Nhà văn hoá cụm 1 Số 12, Đường Liên Thôn 2, xã Ô Diên, Hà Nội'
+
 export default {
   name: 'CeremonySection',
+  props: {
+    isBrideVariant: { type: Boolean, default: false }
+  },
   data() {
     return {
-      invitationDay: '28',
-      invitationMonth: '01',
-      invitationYear: '2026',
-      countdown: {
-        days: 0,
-        hours: 0,
-        minutes: 0,
-        seconds: 0
-      },
-      targetDate: new Date('2026-01-29T17:00:00'),
-      interval: null
+      baseEvents: [
+        {
+          name: 'TIỆC CHIỀU',
+          time: '16:00',
+          date: '11/03/2026',
+          location: GROOM_ADDRESS,
+          image: '/assets/DSC01350.jpg'
+        },
+        {
+          name: 'LỄ THÀNH HÔN',
+          time: '13:00',
+          date: '12/03/2026',
+          location: GROOM_ADDRESS,
+          image: '/assets/DSC01794.jpg'
+        }
+      ]
     }
   },
-  mounted() {
-    this.updateCountdown()
-    this.interval = setInterval(this.updateCountdown, 1000)
-  },
-  beforeUnmount() {
-    if (this.interval) {
-      clearInterval(this.interval)
-    }
-  },
-  methods: {
-    updateCountdown() {
-      const now = new Date().getTime()
-      const distance = this.targetDate.getTime() - now
-      
-      if (distance < 0) {
-        this.countdown = { days: 0, hours: 0, minutes: 0, seconds: 0 }
-        return
-      }
-      
-      this.countdown.days = Math.floor(distance / (1000 * 60 * 60 * 24))
-      this.countdown.hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-      this.countdown.minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
-      this.countdown.seconds = Math.floor((distance % (1000 * 60)) / 1000)
-    },
-    handleSendWish() {
-      // Scroll to guestbook section
-      const guestbookSection = document.getElementById('message') || document.querySelector('.guestbook-section')
-      if (guestbookSection) {
-        guestbookSection.scrollIntoView({ behavior: 'smooth' })
-      }
-    },
-    handleConfirmAttendance() {
-      alert('Cảm ơn bạn đã xác nhận tham dự!')
+  computed: {
+    events() {
+      if (!this.isBrideVariant) return this.baseEvents
+      return this.baseEvents.map(e => ({
+        ...e,
+        name: e.name === 'LỄ THÀNH HÔN' ? 'LỄ VU QUY' : e.name,
+        location: e.name === 'LỄ THÀNH HÔN' ? OTHER_ADDRESS : RECEPTION_ADDRESS
+      }))
     }
   }
 }
 </script>
 
 <style scoped>
-.font-pinyonScript {
-  font-family: 'Pinyon Script', cursive !important;
-}
-
-.font-prata {
-  font-family: 'Prata', serif !important;
-}
-
-.text-dark-200 {
-  color: #333;
-}
-
-.relative {
+.ceremony-root {
   position: relative;
 }
 
-.absolute {
-  position: absolute;
+.ceremony-section {
+  background: var(--bg-color);
+  padding: 72px 20px 56px;
 }
 
-.bg-white {
-  background-color: white;
+.ceremony-inner {
+  max-width: 640px;
+  margin: 0 auto;
 }
 
-.grid {
-  display: grid;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.pt-\[72px\] {
-  padding-top: 72px;
-}
-
-.md\:pt-\[90px\] {
-  @media (min-width: 768px) {
-    padding-top: 90px;
-  }
-}
-
-.max-w-\[1443px\] {
-  max-width: 1443px;
-}
-
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.mx-\[15px\] {
-  margin-left: 15px;
-  margin-right: 15px;
-}
-
-.text-\[40px\] {
-  font-size: 40px;
-}
-
-.md\:text-\[48px\] {
-  @media (min-width: 768px) {
-    font-size: 48px;
-  }
-}
-
-.leading-\[60px\] {
-  line-height: 60px;
-}
-
-.bg-transparent {
-  background-color: transparent;
-}
-
-.w-full {
-  width: 100%;
-}
-
-.text-base {
-  font-size: 1rem;
-}
-
-.mt-1 {
-  margin-top: 0.25rem;
-}
-
-.px-\[15px\] {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-.mt-\[28px\] {
-  margin-top: 28px;
-}
-
-.py-\[28px\] {
-  padding-top: 28px;
-  padding-bottom: 28px;
-}
-
-.justify-center {
-  justify-content: center;
-}
-
-.items-center {
-  align-items: center;
-}
-
-.left-0 {
-  left: 0;
-}
-
-.top-0 {
-  top: 0;
-}
-
-.right-0 {
-  right: 0;
-}
-
-.bottom-0 {
-  bottom: 0;
-}
-
-.w-\[272px\] {
-  width: 272px;
-}
-
-.h-\[100\%\] {
-  height: 100%;
-}
-
-.hidden {
-  display: none;
-}
-
-.md\:block {
-  @media (min-width: 768px) {
-    display: block;
-  }
-}
-
-.text-2xl {
-  font-size: 1.5rem;
-}
-
-.md\:text-\[32px\] {
-  @media (min-width: 768px) {
-    font-size: 32px;
-  }
-}
-
-.leading-\[44px\] {
-  line-height: 44px;
-}
-
-.flex {
-  display: flex;
-}
-
-.space-x-\[20px\] > * + * {
-  margin-left: 20px;
-}
-
-.md\:space-x-\[35px\] > * + * {
-  @media (min-width: 768px) {
-    margin-left: 35px;
-  }
-}
-
-.text-\[32px\] {
-  font-size: 32px;
-}
-
-.md\:text-\[56px\] {
-  @media (min-width: 768px) {
-    font-size: 56px;
-  }
-}
-
-.h-auto {
-  height: auto;
-}
-
-.pt-10 {
-  padding-top: 2.5rem;
-}
-
-.pb-\[35px\] {
-  padding-bottom: 35px;
-}
-
-.leading-none {
-  line-height: 1;
-}
-
-.self-stretch {
-  align-self: stretch;
-}
-
-.w-\[1\.66px\] {
-  width: 1.66px;
-}
-
-.bg-\[#F4DBCE\] {
-  background-color: #F4DBCE;
-}
-
-.mt-6 {
-  margin-top: 1.5rem;
-}
-
-.gap-2 {
-  gap: 0.5rem;
-}
-
-.md\:gap-4 {
-  @media (min-width: 768px) {
-    gap: 1rem;
-  }
-}
-
-.flex-col {
-  flex-direction: column;
-}
-
-.w-\[60px\] {
-  width: 60px;
-}
-
-.h-\[60px\] {
-  height: 60px;
-}
-
-.md\:w-\[80px\] {
-  @media (min-width: 768px) {
-    width: 80px;
-  }
-}
-
-.md\:h-\[80px\] {
-  @media (min-width: 768px) {
-    height: 80px;
-  }
-}
-
-.rounded-lg {
-  border-radius: 0.5rem;
-}
-
-.font-bold {
+/* Tiêu đề */
+.ceremony-main-title {
+  margin: 0 0 12px;
+  font-size: 2rem;
   font-weight: 700;
+  color: var(--primary-color);
+  text-align: center;
+  letter-spacing: 0.02em;
 }
 
-.text-xs {
-  font-size: 0.75rem;
+/* Mô tả + kim cương */
+.ceremony-subtitle-wrap {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 32px;
+  padding: 0 24px;
 }
 
-.md\:text-sm {
-  @media (min-width: 768px) {
-    font-size: 0.875rem;
-  }
+.ceremony-diamonds {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
-.md\:text-3xl {
-  @media (min-width: 768px) {
-    font-size: 1.875rem;
-  }
+.ceremony-diamond {
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--primary-color);
+  transform: rotate(45deg);
 }
 
-.pt-\[30px\] {
-  padding-top: 30px;
+.ceremony-subtitle {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-dark);
+  text-align: center;
+  max-width: 420px;
 }
 
-.pb-10 {
-  padding-bottom: 2.5rem;
+/* Thẻ sự kiện */
+.ceremony-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.md\:pb-\[56px\] {
-  @media (min-width: 768px) {
-    padding-bottom: 56px;
-  }
+.ceremony-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: #fff;
+  border-radius: 12px;
+  border: 2px solid var(--primary-color);
+  box-shadow: inset 0 0 0 1px var(--primary-color), 0 2px 8px rgba(0, 0, 0, 0.06);
+  min-height: 100px;
 }
 
-.md\:mb-10 {
-  @media (min-width: 768px) {
-    margin-bottom: 2.5rem;
-  }
+.ceremony-card-photo-wrap {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #f5f5f5;
 }
 
-.flex-row {
-  flex-direction: row;
+.ceremony-card-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 18%;
+  display: block;
 }
 
-.gap-8 {
-  gap: 2rem;
+.ceremony-card-body {
+  flex: 1;
+  min-width: 0;
 }
 
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-.pb-0 {
-  padding-bottom: 0;
-}
-
-.uppercase {
+.ceremony-card-title {
+  margin: 0 0 6px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  letter-spacing: 0.03em;
   text-transform: uppercase;
 }
 
-.rounded-full {
-  border-radius: 9999px;
+.ceremony-card-time,
+.ceremony-card-location {
+  margin: 0 0 4px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: #555;
+  text-transform: uppercase;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
 }
 
-.text-white {
-  color: white;
+.ceremony-card-location {
+  margin-bottom: 0;
 }
 
-.text-sm {
-  font-size: 0.875rem;
+.ceremony-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--primary-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.md\:text-\[18px\] {
-  @media (min-width: 768px) {
-    font-size: 18px;
+.ceremony-icon svg {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .ceremony-section {
+    padding: 90px 24px 72px;
   }
-}
 
-.min-w-\[180px\] {
-  min-width: 180px;
-}
-
-.md\:min-w-\[250px\] {
-  @media (min-width: 768px) {
-    min-width: 250px;
+  .ceremony-main-title {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
   }
-}
 
-.p-3 {
-  padding: 0.75rem;
-}
-
-.md\:p-6 {
-  @media (min-width: 768px) {
-    padding: 1.5rem;
+  .ceremony-subtitle-wrap {
+    margin-bottom: 40px;
   }
-}
 
-button {
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
+  .ceremony-subtitle {
+    font-size: 1rem;
+  }
 
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  .ceremony-diamond {
+    width: 14px;
+    height: 14px;
+  }
+
+  .ceremony-card {
+    padding: 20px 24px;
+    gap: 20px;
+  }
+
+  .ceremony-card-photo-wrap {
+    width: 88px;
+    height: 88px;
+  }
+
+  .ceremony-card-title {
+    font-size: 1.25rem;
+  }
+
+  .ceremony-card-time,
+  .ceremony-card-location {
+    font-size: 0.875rem;
+  }
 }
 </style>
-
-

@@ -1,96 +1,79 @@
 <template>
-  <section id="banner" class="banner-section">
+  <section id="banner" class="banner-section" :class="{ 'banner-entrance': playEntrance }">
     <div class="relative">
-      <section class="relative" style="background: rgb(251, 247, 245);">
+      <section class="relative banner-bg">
         <img 
-          class="absolute top-0 left-0 max-w-[188px] max-h-[174px] md:max-w-[327px] md:max-h-[303px]" 
+          class="absolute top-0 right-0 max-w-[188px] max-h-[174px] md:max-w-[327px] md:max-h-[303px] left-auto" 
           src="/assets/7.png" 
           loading="lazy"
           alt="decoration"
         >
         
-        <div class="max-w-[1443px] mx-auto grid md:grid-cols-[1fr,1.5fr] md:pt-[60px] gap-[30px] px-[15px]">
-          <!-- Left side - Text content -->
-          <div class="flex flex-col items-center justify-center md:pt-[125px]">
-            <div class="relative">
-              <div class="banner-title font-prata uppercase text-dark-200 text-lg md:text-2xl">
-                Lễ Thành Hôn
-              </div>
-            </div>
-            
-            <div class="mt-6 mb-[41px] md:mb-[93px]">
-              <div class="relative">
-                <div class="groom-name font-pinyonScript text-[56px] md:text-[72px] md:leading-[90px] text-center" style="font-family: 'Pinyon Script', cursive; color: rgb(161, 47, 12);">
-                  Văn Tiến
-                </div>
-              </div>
-              
-              <h1 class="text-[64px] md:leading-[60px] h-[60px] md:h-auto items-center flex justify-center font-pinyonScript text-center" style="color: rgb(161, 47, 12);">
-                & 
-              </h1>
-              
-              <div class="relative">
-                <div class="bride-name font-pinyonScript text-[56px] md:text-[72px] md:leading-[90px] text-center" style="font-family: 'Pinyon Script', cursive; color: rgb(161, 47, 12);">
-                  Huyền Trang
-                </div>
-              </div>
-            </div>
-            
-            <!-- Date display -->
-            <div class="flex space-x-[15px] md:space-x-[30px] text-[32px] md:text-[80px] items-center h-auto" style="color: rgb(244, 219, 206);">
-              <div class="relative">
-                <div class="leading-none">29</div>
-              </div>
-              <div class="self-stretch w-[1.66px]" style="background: rgb(244, 219, 206);"></div>
-              <div class="relative">
-                <div class="leading-none">01</div>
-              </div>
-              <div class="self-stretch w-[1.66px]" style="background: rgb(244, 219, 206);"></div>
-              <div class="relative">
-                <div class="leading-none">2026</div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Right side - Images -->
-          <div class="relative">
-            <div class="flex items-end pl-5 justify-between md:justify-center">
-              <!-- Main photo container -->
+        <div class="max-w-[1443px] mx-auto grid md:grid-cols-[1.5fr,1fr] md:pt-[60px] gap-[30px] px-[15px]">
+          <!-- Left side - Images (đảo bố cục: ảnh trái, chữ phải) - hiệu ứng bay vào -->
+          <div class="relative order-2 md:order-1" data-aos="fade-up" data-aos-duration="700" data-aos-delay="200">
+            <div class="flex items-end justify-end md:justify-center pr-5 md:pr-0">
               <div class="relative w-[223px] h-[261px] md:w-[497px] md:h-[600px]">
-                <div class="overflow-hidden cursor-pointer absolute w-full h-full z-20 p-0 rounded-t-full border-[1px]" style="border-color: rgb(161, 47, 12); padding: 0px; border-style: solid;">
+                <div class="overflow-hidden cursor-pointer absolute w-full h-full z-20 p-0 rounded-t-full border-[1px] banner-border">
                   <img 
                     class="w-full h-full z-10 object-cover border-transparent" 
-                    src="/assets/a143A1171_60x90_AL5B_1768320020_1589.webp" 
+                    :src="imgCouple" 
                     loading="lazy" 
                     draggable="false"
                     alt="Wedding couple"
                   >
                 </div>
-                <div class="z-10 absolute bottom-0 rounded-t-full border-[1px] w-[223px] h-[261px] md:w-[497px] md:h-[600px]" style="border-color: rgb(161, 47, 12);"></div>
-                <div class="z-10 absolute bottom-0 translate-x-5 md:translate-x-10 rounded-t-full border-r-[1px] w-[223px] h-[261px] md:w-[497px] md:h-[600px]" style="border-color: rgb(161, 47, 12);"></div>
+                <div class="z-10 absolute bottom-0 rounded-t-full border-[1px] w-[223px] h-[261px] md:w-[497px] md:h-[600px] banner-border"></div>
+                <div class="z-10 absolute bottom-0 -translate-x-5 md:-translate-x-10 rounded-t-full border-r-[1px] w-[223px] h-[261px] md:w-[497px] md:h-[600px] banner-border"></div>
               </div>
-              
-              <!-- Secondary photo -->
-              <div class="relative w-[134px] h-[158px] md:w-[297px] md:h-[349px] z-30 -translate-x-20">
-                <div class="overflow-hidden cursor-pointer absolute w-full h-full z-20 rounded-t-full border-[2px] p-0" style="border-color: rgb(161, 47, 12); padding: 0px;border-style: solid;">
+              <div class=" relative w-[134px] h-[158px] md:w-[297px] md:h-[349px] z-30 translate-x-5 md:translate-x-8">
+                <div class="overflow-hidden cursor-pointer absolute w-full h-full z-20 rounded-t-full border-[2px] p-0 banner-border">
                   <img 
-                    class="w-full h-full z-10 object-cover border-transparent" 
-                    src="/assets/c143A1672_1768320037_1140.webp" 
-                    loading="lazy" 
+                    class="w-full h-full z-10 object-cover banner-img-secondary border-transparent" 
+                    :src="imgCoupleSecondary" 
+                    loading="lazy"
                     draggable="false"
                     alt="Wedding couple secondary"
                   >
                 </div>
-                <div class="z-10 absolute bottom-0 rounded-t-full border-[1px] w-[134px] h-[158px] md:w-[297px] md:h-[349px]" style="border-color: rgb(161, 47, 12);"></div>
+                <div class="z-10 absolute bottom-0 rounded-t-full border-[1px] w-[134px] h-[158px] md:w-[297px] md:h-[349px] banner-border"></div>
               </div>
             </div>
-            
             <img 
               src="/assets/04.png" 
-              class="absolute -bottom-10 md:-bottom-20 right-0 z-30 w-[115px] h-[96px] md:w-[256px] md:h-[213px]" 
+              class="absolute -bottom-10 md:-bottom-20 left-0 md:left-4 right-auto z-30 w-[115px] h-[96px] md:w-[256px] md:h-[213px]" 
               loading="lazy"
               alt="decoration"
             >
+          </div>
+          
+          <!-- Right side - Text content (hiệu ứng khi vừa mở thiệp) -->
+          <div class="flex flex-col items-center justify-center md:pt-[125px] order-1 md:order-2 md:pl-8 banner-text-block">
+            <div class="relative banner-entrance-title">
+              <div class="banner-title font-prata uppercase text-lg md:text-2xl theme-primary">
+                {{ isBrideVariant ? 'Lễ Vu Quy' : 'Lễ Thành Hôn' }}
+              </div>
+            </div>
+            <div class="mt-6 mb-[41px] md:mb-[93px] banner-entrance-names">
+              <div class="relative">
+                <div class="groom-name font-pinyonScript text-[56px] md:text-[72px] md:leading-[90px] text-center theme-primary">
+                  Văn Huy
+                </div>
+              </div>
+              <h1 class="text-[64px] md:leading-[60px] h-[60px] md:h-auto items-center flex justify-center font-pinyonScript text-center theme-primary banner-entrance-amp">&</h1>
+              <div class="relative">
+                <div class="bride-name font-pinyonScript text-[56px] md:text-[72px] md:leading-[90px] text-center theme-primary">
+                  Ngọc Ánh
+                </div>
+              </div>
+            </div>
+            <div class="flex space-x-[15px] md:space-x-[30px] text-[32px] md:text-[80px] items-center h-auto theme-secondary banner-entrance-date">
+              <div class="relative"><div class="leading-none">12</div></div>
+              <div class="self-stretch w-[1.66px] theme-secondary-bg"></div>
+              <div class="relative"><div class="leading-none">03</div></div>
+              <div class="self-stretch w-[1.66px] theme-secondary-bg"></div>
+              <div class="relative"><div class="leading-none">2026</div></div>
+            </div>
           </div>
         </div>
       </section>
@@ -100,7 +83,23 @@
 
 <script>
 export default {
-  name: 'BannerSection'
+  name: 'BannerSection',
+  props: {
+    openedAt: { type: Number, default: null },
+    isBrideVariant: { type: Boolean, default: false }
+  },
+  data() {
+    return {
+      imgCouple: '/assets/DSC00948.jpg',
+      imgCoupleSecondary: '/assets/DSC01819.jpg',
+      playEntrance: false
+    }
+  },
+  watch: {
+    openedAt(v) {
+      if (v) this.playEntrance = true
+    }
+  }
 }
 </script>
 
@@ -108,6 +107,64 @@ export default {
 .banner-section {
   width: 100%;
   position: relative;
+}
+
+/* Hiệu ứng xuất hiện khi vừa mở thiệp */
+.banner-entrance .banner-entrance-title {
+  animation: bannerFadeUp 0.9s ease-out forwards;
+  opacity: 0;
+}
+
+.banner-entrance .banner-entrance-names .groom-name {
+  animation: bannerFadeUp 0.8s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+.banner-entrance .banner-entrance-names .banner-entrance-amp {
+  animation: bannerFadeUp 0.8s ease-out 0.35s forwards;
+  opacity: 0;
+}
+
+.banner-entrance .banner-entrance-names .bride-name {
+  animation: bannerFadeUp 0.8s ease-out 0.5s forwards;
+  opacity: 0;
+}
+
+.banner-entrance .banner-entrance-date {
+  animation: bannerFadeUp 0.8s ease-out 0.7s forwards;
+  opacity: 0;
+}
+
+@keyframes bannerFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.banner-bg {
+  background: var(--bg-color);
+}
+
+.banner-border {
+  border-color: var(--primary-color);
+  border-style: solid;
+}
+
+.theme-primary {
+  color: var(--primary-color);
+}
+
+.theme-secondary {
+  color: var(--secondary-color);
+}
+
+.theme-secondary-bg {
+  background: var(--secondary-color);
 }
 
 .font-pinyonScript {
@@ -168,6 +225,11 @@ export default {
 
 .object-cover {
   object-fit: cover;
+}
+
+/* Ảnh cặp đôi nhỏ: dịch xuống để không cắt mất đầu */
+.banner-img-secondary {
+  object-position: 50% 8%;
 }
 
 .cursor-pointer {
@@ -305,7 +367,7 @@ export default {
   display: grid;
 }
 
-.md\:grid-cols-\[1fr\,1\.5fr\] {
+.md\:grid-cols-\[1\.5fr\,1fr\] {
   @media (min-width: 768px) {
     grid-template-columns: 1fr 1.5fr;
   }
@@ -477,7 +539,7 @@ export default {
 }
 
 @media (max-width: 767px) {
-  .md\:grid-cols-\[1fr\,1\.5fr\] {
+  .md\:grid-cols-\[1\.5fr\,1fr\] {
     grid-template-columns: 1fr;
   }
   

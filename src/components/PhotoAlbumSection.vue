@@ -8,8 +8,8 @@
           </div>
         </div>
         
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 album-image" >
-          <div v-for="(photo, index) in visiblePhotos" :key="index" :class="{ 'hidden': index >= 6 && !showAll }">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4 album-image" >
+          <div v-for="(photo, index) in photos" :key="index" :class="{ 'hidden': index >= 6 && !showAll }" :data-aos="'fade-up'" :data-aos-delay="100 + index * 60" data-aos-duration="500">
             <a :href="photo.full" @click.prevent="openLightbox(index)">
               <img 
                 :src="photo.thumbnail" 
@@ -21,11 +21,11 @@
           </div>
         </div>
         
-        <div class="flex justify-center mt-8 md:mt-[72px]" v-if="!showAll">
+        <div class="flex justify-center mt-8 md:mt-[72px]" v-if="photos.length > 6 && !showAll">
           <button 
             id="viewMoreImagesBtn" 
             class="uppercase rounded-full text-white font-prata text-sm md:text-[18px] min-w-[180px] md:min-w-[250px] p-3 md:p-6" 
-            style="background: rgb(161, 47, 12); color: rgb(251, 247, 245);"
+            style="background: var(--primary-color); color: #fff;"
             @click="showMoreImages"
           >
             Xem thêm ảnh
@@ -54,56 +54,61 @@ export default {
       currentIndex: 0,
       photos: [
         {
-          thumbnail: '/assets/a143A1171_60x90_AL5B_1768319473_2190.webp',
-          full: '/assets/a143A1171_60x90_AL5B_1768319473_2190.webp',
+          thumbnail: '/assets/DSC00950.jpg',
+          full: '/assets/DSC00950.jpg',
           alt: 'Wedding photo 1'
         },
         {
-          thumbnail: '/assets/b143A1461.jpg',
-          full: '/assets/b143A1461.jpg',
+          thumbnail: '/assets/DSC01613.jpg',
+          full: '/assets/DSC01613.jpg',
           alt: 'Wedding photo 2'
         },
         {
-          thumbnail: '/assets/c143A1672.jpg',
-          full: '/assets/c143A1672.jpg',
+          thumbnail: '/assets/DSC01239.jpg',
+          full: '/assets/DSC01239.jpg',
           alt: 'Wedding photo 3'
         },
         {
-          thumbnail: '/assets/d143A1359.jpg',
-          full: '/assets/d143A1359.jpg',
+          thumbnail: '/assets/DSC01901.jpg',
+          full: '/assets/DSC01901.jpg',
           alt: 'Wedding photo 4'
         },
         {
-          thumbnail: '/assets/e143A1897.jpg',
-          full: '/assets/e143A1897.jpg',
+          thumbnail: '/assets/DSC01516.jpg',
+          full: '/assets/DSC01516.jpg',
           alt: 'Wedding photo 5'
         },
         {
-          thumbnail: '/assets/f143A1536.jpg',
-          full: '/assets/f143A1536.jpg',
+          thumbnail: '/assets/DSC01077.jpg',
+          full: '/assets/DSC01077.jpg',
           alt: 'Wedding photo 6'
         },
         {
-          thumbnail: '/assets/g143A1192.jpg',
-          full: '/assets/g143A1192.jpg',
+          thumbnail: '/assets/DSC01739.jpg',
+          full: '/assets/DSC01739.jpg',
           alt: 'Wedding photo 7'
         },
         {
-          thumbnail: '/assets/l143A1869.jpg',
-          full: '/assets/l143A1869.jpg',
+          thumbnail: '/assets/DSC01157.jpg',
+          full: '/assets/DSC01157.jpg',
           alt: 'Wedding photo 8'
+        },
+        {
+          thumbnail: '/assets/DSC01350.jpg',
+          full: '/assets/DSC01350.jpg',
+          alt: 'Wedding photo 9'
         }
       ]
-    }
-  },
-  computed: {
-    visiblePhotos() {
-      return this.showAll ? this.photos : this.photos.slice(0, 6)
     }
   },
   methods: {
     showMoreImages() {
       this.showAll = true
+      this.$nextTick(() => {
+        if (typeof window !== 'undefined' && window.AOS) {
+          window.AOS.refresh()
+        }
+      })
     },
     openLightbox(index) {
       this.currentIndex = index
@@ -204,8 +209,8 @@ export default {
   display: grid;
 }
 
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
 .md\:grid-cols-3 {

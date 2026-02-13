@@ -4,13 +4,13 @@
       <section class="relative grid text-center bg-white overflow-x-hidden">
         <div class="max-w-9xl mx-auto pt-[60px] w-full">
           <div class="relative">
-            <div class="timeline-mainTitle text-center text-[48px] md:text-[72px] leading-[40px] md:leading-[90px] font-pinyonScript md:mb-10 px-4" style="color: rgb(161, 47, 12);">
+            <div class="timeline-mainTitle text-center text-[48px] md:text-[72px] leading-[40px] md:leading-[90px] font-pinyonScript md:mb-10 px-4" style="color: var(--primary-color);">
               Cột mốc
             </div>
           </div>
           
           <div class="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[30px] gap-y-9 w-full px-[15px]">
-            <div v-for="(milestone, index) in milestones" :key="index" class="relative grid grid-rows-2 w-full">
+            <div v-for="(milestone, index) in milestones" :key="index" class="relative grid grid-rows-2 w-full" :data-aos="'fade-up'" :data-aos-delay="150 + index * 100" data-aos-duration="500">
               <div class="w-full relative rounded-t-full h-full md:h-[385px] border-gray-400 border-none">
                 <img 
                   :src="milestone.image" 
@@ -20,7 +20,7 @@
                 >
               </div>
               
-              <div class="relative h-fit" style="background-color: rgb(251, 247, 245);">
+              <div class="relative h-fit" style="background-color: var(--bg-color);">
                 <div class="absolute -top-20 w-full flex justify-center items-center z-40 pointer-events-none">
                   <img 
                     src="/assets/1.png" 
@@ -31,7 +31,7 @@
                 </div>
                 
                 <div class="pt-16 px-10 pb-10">
-                  <h1 class="text-[32px] md:text-[40px] font-pinyonScript" style="color: rgb(161, 47, 12); font-family: 'Pinyon Script', cursive;">
+                  <h1 class="text-[32px] md:text-[40px] font-pinyonScript" style="color: var(--primary-color); font-family: 'Pinyon Script', cursive;">
                     {{ milestone.title }}
                   </h1>
                   <div class="mt-3 text-dark-200" style="font-family: 'Pinyon Script', cursive; height: 7.5em; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden;">
@@ -40,11 +40,11 @@
                 </div>
                 
                 <div class="flex justify-center items-center">
-                  <div class="flex space-x-[12px] md:space-x-[35px] text-[28px] md:text-[40px] items-center h-auto" style="color: rgb(244, 219, 206);">
+                  <div class="flex space-x-[12px] md:space-x-[35px] text-[28px] md:text-[40px] items-center h-auto" style="color: var(--secondary-color);">
                     <span class="leading-none">{{ milestone.day }}</span>
-                    <div class="self-stretch w-[1.66px]" style="background-color: rgb(244, 219, 206);"></div>
+                    <div class="self-stretch w-[1.66px]" style="background-color: var(--secondary-color);"></div>
                     <span class="leading-none">{{ milestone.month }}</span>
-                    <div class="self-stretch w-[1.66px]" style="background-color: rgb(244, 219, 206);"></div>
+                    <div class="self-stretch w-[1.66px]" style="background-color: var(--secondary-color);"></div>
                     <span class="leading-none">{{ milestone.year }}</span>
                   </div>
                 </div>

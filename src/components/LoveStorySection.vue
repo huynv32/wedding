@@ -1,41 +1,42 @@
 <template>
-  <div id="story" class="relative" data-aos="fade-up" data-aos-delay="100">
+  <div id="story" class="relative story-section" :class="{ 'story-entrance': playEntrance }" data-aos="fade-up" data-aos-delay="100">
     <div class="relative">
-      <section class="relative grid text-center" style="background-color: rgb(251, 247, 245);">
-        <div class="hidden md:block uppercase absolute top-1/3 -left-[335px] font-prata rotate-90 text-[110px]" style="color: rgb(244, 219, 206);">Love story</div>
+      <section class="relative grid text-center" style="background-color: var(--bg-color);">
+        <div class="hidden md:block uppercase absolute top-1/3 -left-[335px] font-prata rotate-90 text-[110px]" style="color: var(--secondary-color);">Love story</div>
         
         <div class="max-w-9xl mx-auto pt-[55px] md:pt-[95px]">
-          <div class="relative">
-            <div class="story-title text-center text-[40px] md:text-[72px] leading-[50px] md:leading-[90px] font-pinyonScript md:mb-10 px-4" style="font-family: 'Pinyon Script', cursive; color: rgb(161, 47, 12);" data-aos="fade-down">
+          <div class="relative story-entrance-title-wrap">
+            <div class="story-title text-center text-[40px] md:text-[72px] leading-[50px] md:leading-[90px] font-pinyonScript md:mb-10 px-4" style="font-family: 'Pinyon Script', cursive; color: var(--primary-color);" data-aos="fade-down">
               Chuyện chúng mình
             </div>
           </div>
+        
           
-          <div class="w-full max-w-[836px] mx-auto px-4">
-            <div class="relative">
-              <div class="story-content text-base mt-4 text-dark-200" data-aos="fade-up" data-aos-delay="100">
-                Chúng tôi rất vui mừng được chia sẻ khoảnh khắc quan trọng nhất của cuộc đời mình với gia đình, bạn bè và những người thân yêu. Ngày cưới không chỉ là sự khởi đầu của hành trình mới mà còn là dịp để chúng tôi cùng các bạn tạo nên những kỷ niệm đáng nhớ.
-              </div>
-            </div>
-          </div>
-          
-          <div class="relative mt-[41px] md:mt-14 max-w-[1054px] md:h-[500px] px-[12px] mx-auto mb-16 md:mb-0 h-[100%]">
-            <div class="overflow-hidden cursor-pointer z-30 absolute left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-4 w-full md:w-full md:h-full max-w-[350px] md:max-w-none border-[1px] rounded-tl-[100px] rounded-tr-[100px] md:rounded-tl-[263px] md:rounded-tr-[263px] border-red-800 z-1" style="padding: 0px;height: 100%;">
+          <div class="story-photo-container relative mt-[41px] md:mt-14 max-w-[1054px] px-[12px] mx-auto mb-16 md:mb-0">
+            <div class="overflow-hidden cursor-pointer z-30 absolute left-1/2 -translate-x-1/2 top-0 w-full h-full max-w-[350px] md:max-w-[560px] border-[1px] rounded-tl-[100px] rounded-tr-[100px] md:rounded-tl-[240px] md:rounded-tr-[240px] border-red-800 z-1 story-photo-wrap" style="padding: 0; background: var(--bg-color);">
               <img 
-                class="w-full h-full z-10 object-cover border-transparent" 
-                src="/assets/143A1768.jpg" 
+                class="w-full h-full z-10 object-contain border-transparent story-photo-img" 
+                :src="imgStory" 
                 loading="lazy" 
                 draggable="false"
                 alt="Love story"
               >
             </div>
-            <div class="absolute bg-transparent left-1/2 -translate-x-1/2 md:left-[14px] md:translate-x-0 top-0 z-20 border-r-[1px] rounded-tl-[100px] rounded-tr-[100px] md:rounded-tl-[263px] md:rounded-tr-[263px] border-red-800 w-full max-w-[350px] md:max-w-full h-full" style="border-color: rgb(161, 47, 12); height: 100%;"></div>
+            <div class="absolute bg-transparent left-1/2 -translate-x-1/2 top-0 z-20 w-full h-full max-w-[350px] md:max-w-[560px] border-r-[1px] rounded-tl-[100px] rounded-tr-[100px] md:rounded-tl-[240px] md:rounded-tr-[240px] border-red-800 pointer-events-none" style="border-color: var(--primary-color);"></div>
             <img 
               src="/assets/6.png" 
               class="z-30 absolute -bottom-8 right-0 md:-bottom-12 md:-right-[80px] w-[120px] h-[105px] md:w-[361px] md:h-[269px]" 
               loading="lazy"
               alt="decoration"
             >
+          </div>
+            
+          <div class="w-full max-w-[836px] mx-auto px-4 story-entrance-content-wrap mt-10 md:mt-[100px]">
+            <div class="relative">
+              <div class="story-content text-base mt-5 text-dark-200" data-aos="fade-up" data-aos-delay="100">
+                Chúng tôi rất vui mừng được chia sẻ khoảnh khắc quan trọng nhất của cuộc đời mình với gia đình, bạn bè và những người thân yêu. Ngày cưới không chỉ là sự khởi đầu của hành trình mới mà còn là dịp để chúng tôi cùng các bạn tạo nên những kỷ niệm đáng nhớ.
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -45,11 +46,78 @@
 
 <script>
 export default {
-  name: 'LoveStorySection'
+  name: 'LoveStorySection',
+  props: {
+    openedAt: { type: Number, default: null }
+  },
+  data() {
+    return {
+      imgStory: '/assets/DSC01492.jpg',
+      playEntrance: false
+    }
+  },
+  watch: {
+    openedAt(v) {
+      if (v) this.playEntrance = true
+    }
+  }
 }
 </script>
 
 <style scoped>
+/* Hiệu ứng xuất hiện khi vừa mở thiệp (giống Lễ Thành Hôn) */
+.story-entrance .story-entrance-title-wrap .story-title {
+  animation: storyFadeUp 0.9s ease-out forwards;
+  opacity: 0;
+}
+
+.story-entrance .story-entrance-content-wrap .story-content {
+  animation: storyFadeUp 0.8s ease-out 0.25s forwards;
+  opacity: 0;
+}
+
+@keyframes storyFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Trên desktop: margin-top 80px cho khối nội dung "Chúng tôi rất vui mừng..." */
+@media (min-width: 768px) {
+  .story-entrance-content-wrap {
+    margin-top: 80px;
+  }
+}
+
+/* Khung ảnh Chuyện chúng mình: mobile nhỏ, desktop to và rộng */
+.story-photo-container {
+  min-height: 380px;
+}
+@media (min-width: 768px) {
+  .story-photo-container {
+    min-height: 680px;
+    min-width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .story-photo-wrap {
+    left: -250px;
+    transform: translateX(0);
+    max-width: 720px !important;
+  }
+  .story-photo-wrap + .absolute {
+    left: -250px;
+    transform: translateX(0);
+    max-width: 720px !important;
+  }
+}
+
 .relative {
   position: relative;
 }
@@ -311,6 +379,11 @@ export default {
 
 .object-cover {
   object-fit: cover;
+}
+
+.story-photo-img {
+  object-fit: contain;
+  object-position: center;
 }
 
 .border-transparent {

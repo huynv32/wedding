@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'MuliDisplayVN', sans-serif !important;
+  font-family: 'Lora', 'Cormorant Garamond', Georgia, serif;
 }
 
 html {
@@ -10,10 +10,10 @@ html {
 }
 
 body {
-  font-family: 'MuliDisplayVN', sans-serif !important;
-  background-color: rgb(251, 247, 245);
-  color: #333;
-  line-height: 1.7;
+  font-family: 'Lora', 'Cormorant Garamond', Georgia, serif;
+  background-color: var(--bg-color);
+  color: var(--text-dark);
+  line-height: 1.6;
   overflow-x: hidden;
 }
 
@@ -26,12 +26,15 @@ body {
   font-family: 'Prata', serif !important;
 }
 
-/* Color variables */
+/* Color variables - Theme White & Red */
 :root {
-  --primary-color: rgb(161, 47, 12);
-  --secondary-color: rgb(244, 219, 206);
-  --bg-color: rgb(251, 247, 245);
-  --text-dark: #333;
+  --primary-color: #9B2D30;
+  --primary-dark: #c45c5c;
+  --secondary-color: #c9a0a0;
+  --secondary-light: #e8d0d0;
+  --bg-color: #f5f0f0;
+  --text-dark: #3d3d3d;
+  --accent-gold: #b8956b;
 }
 
 /* Custom scrollbar */
@@ -49,7 +52,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(140, 40, 10);
+  background: var(--primary-dark);
 }
 
 /* Button styles */
@@ -69,9 +72,9 @@ body {
 }
 
 .btn-primary:hover {
-  background-color: rgb(140, 40, 10);
+  background-color: var(--primary-dark);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(161, 47, 12, 0.3);
+  box-shadow: 0 4px 12px rgba(155, 45, 48, 0.35);
 }
 
 .btn-secondary {
@@ -90,13 +93,13 @@ body {
 }
 
 .btn-secondary:hover {
-  background-color: rgb(230, 200, 180);
+  background-color: var(--secondary-light);
   transform: translateY(-2px);
 }
 
-/* Section spacing */
+/* Section spacing - gọn hơn */
 .section {
-  padding: 80px 20px;
+  padding: 44px 20px;
   position: relative;
   max-width: 1443px;
   margin: 0 auto;
@@ -105,7 +108,7 @@ body {
 /* Responsive */
 @media (max-width: 768px) {
   .section {
-    padding: 60px 15px;
+    padding: 32px 15px;
   }
   
   .btn-primary,

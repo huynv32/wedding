@@ -1,483 +1,373 @@
 <template>
-  <div id="event" class="relative" data-aos="fade-up" data-aos-delay="100">
-    <div class="relative">
-      <section class="relative grid py-[88px] text-center" style="background-color: rgb(251, 247, 245);">
-        <img 
-          src="/assets/left.png" 
-          class="absolute -top-0 -left-0 md:w-[280px] md:h-[356px] w-[199px] h-[208px]" 
-          loading="lazy"
-          alt="decoration"
-        >
-        <img 
-          src="/assets/right.png" 
-          class="absolute -bottom-0 -right-0 md:w-[280px] md:h-[356px] w-[199px] h-[208px]" 
-          loading="lazy"
-          alt="decoration"
-        >
-        
-        <div class="max-w-9xl mx-auto py-[95px] w-full">
-          <div class="text-center text-[48px] md:text-[72px] md:leading-[90px] font-pinyonScript mb-8 md:mb-10" style="color: rgb(161, 47, 12); font-family: 'Pinyon Script', cursive;">
-            Sự kiện
-          </div>
-          
-          <div class="flex flex-col relative">
-            <div class="hidden md:block absolute w-2/4 h-1 left-1/4 z-0" style="background: rgb(161, 47, 12); top: 42%"></div>
-            
-            <div class="flex flex-col md:flex-row relative gap-[125px] md:gap-0 justify-evenly" style="padding-bottom: 100px;">
-              <div v-for="(event, index) in events" :key="index" class="relative">
-                <div class="z-20 flex-1 flex flex-col justify-center items-center gap-[34px]">
-                  <img :src="event.icon" class="w-[110px] h-[110px]" loading="lazy" :alt="event.name">
-                  
-                  <div class="flex justify-center">
-                    <div class="uppercase rounded-full text-white font-prata text-sm md:text-[18px] min-w-[180px] md:min-w-[250px] px-4 py-3 md:p-6" style="background-color: rgb(161, 47, 12);">
-                      {{ event.name }}
-                    </div>
-                  </div>
-                  
-                  <div class="px-9">
-                    <div class="flex text-2xl gap-5 justify-center items-center text-dark-200">
-                      <div>{{ event.time }}</div>
-                      <p class="w-[15px] h-[2px] bg-dark-200"></p>
-                      <div class="flex space-x-3 md:space-x-[35px] items-center h-auto">
-                        <div class="leading-none">{{ event.day }}</div>
-                        <div class="self-stretch w-[1.66px] bg-dark-200"></div>
-                        <div class="leading-none">{{ event.month }}</div>
-                        <div class="self-stretch w-[1.66px] bg-dark-200"></div>
-                        <div class="leading-none">{{ event.year }}</div>
-                      </div>
-                    </div>
-                    <div class="font-prata text-base text-dark-200 pt-4 leading-[170%]">
-                      <div class="leading-none">{{ event.location }}</div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="ask-selection flex bg-transparent w-[200px]" style="bottom: -65px;">
-                  <div class="ask-option" style="background-color: rgb(161, 47, 12);">
-                    <a :href="event.mapLink" target="_blank" class="uppercase text-[#EEDED1] px-2 py-2 font-bold text-base w-full md:w-[150px] opacity-50">
-                      <span style="color: rgb(255, 255, 255);">Chỉ đường</span>
-                    </a>
-                  </div>
-                  <div class="ask-option" style="background-color: rgb(244, 219, 206);">
-                    <button class="calendar-link-button uppercase text-[#EEDED1] px-2 py-2 font-bold text-base w-full md:w-[150px]">
-                      <span style="color: rgb(161, 47, 12);">Thêm vào lịch</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+  <div id="event" class="events-root" data-aos="fade-up" data-aos-delay="100">
+    <section class="events-section">
+      <div class="events-inner">
+        <!-- Tiêu đề chính -->
+      
+
+        <!-- Tiêu đề bản đồ -->
+        <h3 class="events-map-title">BẢN ĐỒ</h3>
+
+        <!-- Google Map nhúng -->
+        <div class="events-map-wrap">
+          <iframe
+            class="events-map-iframe"
+            :src="mapEmbedUrl"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Bản đồ địa điểm tiệc cưới"
+          ></iframe>
+          <a
+            :href="receptionEvent.mapLink"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="events-map-directions"
+          >
+            Chỉ đường
+          </a>
+        </div>
+
+        <!-- Các sự kiện khác (Ăn hỏi, Đón dâu) - gọn bên dưới -->
+        <div v-if="otherEvents.length" class="events-other">
+          <div v-for="(event, index) in otherEvents" :key="index" class="events-other-card">
+            <span class="events-other-name">{{ event.name }}</span>
+            <span class="events-other-detail">{{ event.time }} · {{ event.day }}/{{ event.month }}/{{ event.year }}</span>
+            <span class="events-other-location">{{ event.location }}</span>
+            <a :href="event.mapLink" target="_blank" rel="noopener noreferrer" class="events-other-link">Chỉ đường</a>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
+const OTHER_ADDRESS = 'Số 169, Đường Liên Thôn 2, xã Ô Diên, Hà Nội'
+const OTHER_MAP_LINK = 'https://www.google.com/maps?q=' + encodeURIComponent(OTHER_ADDRESS)
+const RECEPTION_ADDRESS = 'Nhà văn hoá cụm 1 Số 12, Đường Liên Thôn 2, xã Ô Diên, Hà Nội'
+const RECEPTION_MAP_LINK = 'https://www.google.com/maps?q=' + encodeURIComponent(RECEPTION_ADDRESS)
+
 export default {
   name: 'EventsSection',
+  props: {
+    isBrideVariant: { type: Boolean, default: false }
+  },
   data() {
     return {
       events: [
         {
           name: 'Ăn hỏi',
-          time: '09:00 AM',
-          day: '28',
-          month: '1',
+          time: '09:00',
+          day: '11',
+          month: '3',
           year: '2026',
-          location: 'Ngõ 1, TDP Ninh Sơn, Phường Chương Mỹ, Hà Nội',
-          mapLink: 'https://maps.app.goo.gl/AffKAnCaj35B5yXi7',
-          icon: '/assets/eventIcon1.png'
+          location: OTHER_ADDRESS,
+          mapLink: OTHER_MAP_LINK,
+          isReception: false
         },
         {
           name: 'Đón dâu',
-          time: '01:30 PM',
-          day: '29',
-          month: '1',
+          time: '13:30',
+          day: '12',
+          month: '3',
           year: '2026',
-          location: 'Ngõ 1, TDP Ninh Sơn, Phường Chương Mỹ, Hà Nội',
-          mapLink: 'https://maps.app.goo.gl/AffKAnCaj35B5yXi7',
-          icon: '/assets/eventIcon2.png'
+          location: OTHER_ADDRESS,
+          mapLink: OTHER_MAP_LINK,
+          isReception: false
         },
         {
-          name: 'Tiệc cưới',
-          time: '02:00 PM',
-          day: '29',
-          month: '1',
+          time: '14:00',
+          day: '12',
+          month: '3',
           year: '2026',
-          location: 'Xóm 1, TDP Ninh Sơn, Phường Chương Mỹ, Hà Nội',
-          mapLink: 'https://maps.app.goo.gl/qTaKAzTsf2MF4PfP7',
-          icon: '/assets/eventIcon3.png'
+          location: 'Số 1, Ngõ 161, đường Ô Diên, xã Ô Diên, Hà Nội',
+          mapLink: 'https://maps.app.goo.gl/Qw9UosWsyVd9yfd87',
+          isReception: true
         }
       ]
+    }
+  },
+  computed: {
+    receptionEvent() {
+      const e = this.events.find(x => x.isReception)
+      if (!e) return this.events[this.events.length - 1]
+      if (this.isBrideVariant) {
+        return { ...e, venueName: e.venueName || e.name, location: RECEPTION_ADDRESS, mapLink: RECEPTION_MAP_LINK }
+      }
+      return { ...e, venueName: e.venueName || e.name }
+    },
+    receptionWeekday() {
+      const e = this.receptionEvent
+      if (!e) return ''
+      const d = new Date(parseInt(e.year), parseInt(e.month) - 1, parseInt(e.day))
+      const days = ['Chủ nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7']
+      return days[d.getDay()]
+    },
+    otherEvents() {
+      return this.events.filter(x => !x.isReception)
+    },
+    mapEmbedUrl() {
+      const loc = this.receptionEvent?.location || ''
+      const q = encodeURIComponent(loc)
+      return `https://www.google.com/maps?q=${q}&output=embed`
     }
   }
 }
 </script>
 
 <style scoped>
-.relative {
+.events-root {
   position: relative;
 }
 
-.grid {
-  display: grid;
-}
-
-.text-center {
+.events-section {
+  background: var(--bg-color);
+  color: var(--primary-color);
+  padding: 2.25rem 1.5rem 2.75rem;
   text-align: center;
 }
 
-.py-\[88px\] {
-  padding-top: 88px;
-  padding-bottom: 88px;
+.events-inner {
+  max-width: 720px;
+  margin: 0 auto;
 }
 
-.absolute {
-  position: absolute;
-}
-
-.-top-0 {
-  top: 0;
-}
-
-.-left-0 {
-  left: 0;
-}
-
-.-bottom-0 {
-  bottom: 0;
-}
-
-.-right-0 {
-  right: 0;
-}
-
-.md\:w-\[280px\] {
-  @media (min-width: 768px) {
-    width: 280px;
-  }
-}
-
-.md\:h-\[356px\] {
-  @media (min-width: 768px) {
-    height: 356px;
-  }
-}
-
-.w-\[199px\] {
-  width: 199px;
-}
-
-.h-\[208px\] {
-  height: 208px;
-}
-
-.max-w-9xl {
-  max-width: 90rem;
-}
-
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.py-\[95px\] {
-  padding-top: 95px;
-  padding-bottom: 95px;
-}
-
-.w-full {
-  width: 100%;
-}
-
-.text-\[48px\] {
-  font-size: 48px;
-}
-
-.md\:text-\[72px\] {
-  @media (min-width: 768px) {
-    font-size: 72px;
-  }
-}
-
-.md\:leading-\[90px\] {
-  @media (min-width: 768px) {
-    line-height: 90px;
-  }
-}
-
-.font-pinyonScript {
-  font-family: 'Pinyon Script', cursive !important;
-}
-
-.mb-8 {
-  margin-bottom: 2rem;
-}
-
-.md\:mb-10 {
-  @media (min-width: 768px) {
-    margin-bottom: 2.5rem;
-  }
-}
-
-.flex-col {
-  flex-direction: column;
-}
-
-.hidden {
-  display: none;
-}
-
-.md\:block {
-  @media (min-width: 768px) {
-    display: block;
-  }
-}
-
-.w-2\/4 {
-  width: 50%;
-}
-
-.h-1 {
-  height: 0.25rem;
-}
-
-.left-1\/4 {
-  left: 25%;
-}
-
-.top-\[56\%\] {
-  top: 56%;
-}
-
-.z-0 {
-  z-index: 0;
-}
-
-.md\:flex-row {
-  @media (min-width: 768px) {
-    flex-direction: row;
-  }
-}
-
-.gap-\[125px\] {
-  gap: 125px;
-}
-
-.md\:gap-0 {
-  @media (min-width: 768px) {
-    gap: 0;
-  }
-}
-
-.justify-evenly {
-  justify-content: space-evenly;
-}
-
-.z-20 {
-  z-index: 20;
-}
-
-.flex-1 {
-  flex: 1 1 0%;
-}
-
-.gap-\[34px\] {
-  gap: 34px;
-}
-
-.w-\[110px\] {
-  width: 110px;
-}
-
-.h-\[110px\] {
-  height: 110px;
-}
-
-.uppercase {
-  text-transform: uppercase;
-}
-
-.rounded-full {
-  border-radius: 9999px;
-}
-
-.text-white {
-  color: white;
-}
-
-.font-prata {
-  font-family: 'Prata', serif !important;
-}
-
-.text-sm {
-  font-size: 0.875rem;
-}
-
-.md\:text-\[18px\] {
-  @media (min-width: 768px) {
-    font-size: 18px;
-  }
-}
-
-.min-w-\[180px\] {
-  min-width: 180px;
-}
-
-.md\:min-w-\[250px\] {
-  @media (min-width: 768px) {
-    min-width: 250px;
-  }
-}
-
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-.py-3 {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-}
-
-.md\:p-6 {
-  @media (min-width: 768px) {
-    padding: 1.5rem;
-  }
-}
-
-.px-9 {
-  padding-left: 2.25rem;
-  padding-right: 2.25rem;
-}
-
-.text-2xl {
-  font-size: 1.5rem;
-}
-
-.gap-5 {
-  gap: 1.25rem;
-}
-
-.text-dark-200 {
-  color: #333;
-}
-
-.w-\[15px\] {
-  width: 15px;
-}
-
-.h-\[2px\] {
-  height: 2px;
-}
-
-.bg-dark-200 {
-  background-color: #333;
-}
-
-.space-x-3 > * + * {
-  margin-left: 0.75rem;
-}
-
-.md\:space-x-\[35px\] > * + * {
-  @media (min-width: 768px) {
-    margin-left: 35px;
-  }
-}
-
-.h-auto {
-  height: auto;
-}
-
-.leading-none {
-  line-height: 1;
-}
-
-.self-stretch {
-  align-self: stretch;
-}
-
-.w-\[1\.66px\] {
-  width: 1.66px;
-}
-
-.text-base {
+/* Tiêu đề "TIỆC CƯỚI SẼ TỔ CHỨC TẠI" - cùng style phần invitation */
+.events-main-title {
+  font-family: 'Prata', serif;
   font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  background: rgba(0, 0, 0, 0.06);
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin: 0 0 1rem;
+  border-radius: 4px;
 }
 
-.pt-4 {
-  padding-top: 1rem;
+/* Hộp địa chỉ - style giống 17:30 Thứ 4 / 11 | 03 | 2026 / địa chỉ */
+.events-address-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.5rem 1.5rem 1.75rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  text-align: center;
 }
 
-.leading-\[170\%\] {
-  line-height: 170%;
+.events-venue-name {
+  font-family: 'Prata', serif;
+  font-size: 1.5rem;
+  line-height: 2.75rem;
+  color: var(--text-dark);
+  margin: 0 0 0.25rem;
 }
 
-.ask-selection {
-    position: absolute;
-    bottom: 0%;
-    transform: none;
-    background: transparent;
-    border: none;
-    width: 400px;
-    max-width: 75%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    z-index: 10;
-    left: 50%;
-    transform: translateX(-50%);
-    gap: 40px;
+@media (min-width: 768px) {
+  .events-venue-name {
+    font-size: 32px;
+    line-height: 44px;
+  }
 }
 
-.ask-option {
-  flex: 1;
+.events-venue-time {
+  font-family: 'Prata', serif;
+  font-size: 1.5rem;
+  line-height: 2.75rem;
+  color: var(--text-dark);
+  margin: 0 0 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .events-venue-time {
+    font-size: 32px;
+    line-height: 44px;
+  }
+}
+
+.events-date-row {
+  display: flex;
   align-items: center;
   justify-content: center;
+  gap: 1.25rem;
+  margin-bottom: 1rem;
 }
 
-.ask-option button {
-  height: 100%;
-}
-
-.px-2 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-}
-
-.py-2 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
-.font-bold {
-  font-weight: 700;
-}
-
-.md\:w-\[150px\] {
-  @media (min-width: 768px) {
-    width: 150px;
+@media (min-width: 768px) {
+  .events-date-row {
+    gap: 2.1875rem;
   }
 }
 
-.pointer-events-none {
-  pointer-events: none;
+.events-date-num {
+  font-family: 'Prata', serif;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--text-dark);
 }
 
-.opacity-50 {
-  opacity: 0.5;
+@media (min-width: 768px) {
+  .events-date-num {
+    font-size: 3.5rem;
+  }
 }
 
-button {
-  cursor: pointer;
-  border: none;
-  background: transparent;
+.events-date-sep {
+  display: inline-block;
+  width: 1.66px;
+  align-self: stretch;
+  background: #F4DBCE;
 }
 
-a {
-  text-decoration: none;
+.events-address {
+  font-family: 'Prata', serif;
+  font-size: 1.5rem;
+  line-height: 2.75rem;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .events-address {
+    font-size: 32px;
+    line-height: 44px;
+  }
+}
+
+/* Tiêu đề "BẢN ĐỒ" */
+.events-map-title {
+  font-family: 'Prata', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  margin: 0 0 0.6rem;
+}
+
+/* Khung bản đồ */
+.events-map-wrap {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  background: #f3f4f6;
+}
+
+.events-map-iframe {
   display: block;
+  width: 100%;
+  height: 320px;
+  border: none;
+}
+
+.events-map-directions {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.5rem 1rem;
+  background: var(--primary-color);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.events-map-directions:hover {
+  filter: brightness(0.92);
+}
+
+/* Các sự kiện khác (Ăn hỏi, Đón dâu) */
+.events-other {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.events-other-card {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  min-width: 200px;
+  max-width: 280px;
+}
+
+.events-other-name {
+  display: block;
+  font-family: 'Prata', serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  margin-bottom: 0.35rem;
+}
+
+.events-other-detail {
+  display: block;
+  font-size: 0.8125rem;
+  color: var(--text-dark);
+  margin-bottom: 0.25rem;
+}
+
+.events-other-location {
+  display: block;
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.events-other-link {
+  font-size: 0.75rem;
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.events-other-link:hover {
+  color: var(--text-dark);
+}
+
+@media (min-width: 768px) {
+  .events-section {
+    padding: 2.75rem 2rem 3rem;
+  }
+
+  .events-main-title {
+    font-size: 1.125rem;
+    padding: 0.6rem 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .events-address-box {
+    padding: 1.35rem 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .events-venue-name {
+    font-size: 1.25rem;
+  }
+
+  .events-address {
+    font-size: 1rem;
+  }
+
+  .events-map-title {
+    font-size: 1.125rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .events-map-iframe {
+    height: 400px;
+  }
 }
 </style>
-
