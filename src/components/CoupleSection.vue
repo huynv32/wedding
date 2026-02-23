@@ -129,11 +129,11 @@ export default {
       showGroomModal: false,
       showBrideModal: false,
       groomName: 'VĂN HUY',
-      groomDescShort: 'Là một người hiền lành nhưng nói nhiều. Thích đi du lịch, thích kiếm tiền và tiêu tiền. Đặc biệt là " Thích Kiên". Luôn coi...',
-      groomDescFull: 'Là một người hiền lành nhưng nói nhiều. Thích đi du lịch, thích kiếm tiền và tiêu tiền. Đặc biệt là " Thích Kiên". Luôn coi gia đình là trên hết và mong muốn xây dựng tổ ấm hạnh phúc cùng người bạn đời.',
+      groomDescShort: 'Là người hiền lành nhưng nói nhiều hơn người ta nghĩ, tôi luôn mang năng lượng tích cực và thích chia sẻ với mọi người xung quanh...',
+      groomDescFull: 'Là người hiền lành nhưng nói nhiều hơn người ta nghĩ, tôi luôn mang năng lượng tích cực và thích chia sẻ với mọi người xung quanh. Tôi thích đi du lịch để mở rộng tầm nhìn, thích kiếm tiền để có sự tự do, và cũng không ngại tận hưởng thành quả sau những ngày làm việc cật lực.',
       brideName: 'NGỌC ÁNH',
-      brideDescShort: 'Là một người hay cười nhưng lại sống nội tâm và hay khóc thầm, không thích đọc sách nhưng thích mua, thích đi du lịch...',
-      brideDescFull: 'Là một người hay cười nhưng lại sống nội tâm và hay khóc thầm, không thích đọc sách nhưng thích mua, thích đi du lịch, thích trồng hoa. Và mình cũng " cực thích Huy " nữa :3'
+      brideDescShort: 'Là một người đam mê xê dịch, chỉ cần có cơ hội là sẽ xách balo lên và khám phá những nơi mới, những góc nhỏ bình yên mà mình chưa từng đặt chân tới...',
+      brideDescFull: 'Là một người đam mê xê dịch, chỉ cần có cơ hội là sẽ xách balo lên và khám phá những nơi mới, những góc nhỏ bình yên mà mình chưa từng đặt chân tới. Ngoài việc đi du lịch, mình còn rất thích cắm hoa. Với mình, việc tự tay lựa những bông hoa đẹp rồi sắp xếp chúng thành một bó hoa hài hòa là cách để thư giãn và nuôi dưỡng tâm hồn.'
     }
   }
 }

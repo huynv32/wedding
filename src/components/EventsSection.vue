@@ -34,7 +34,6 @@
             <span class="events-other-name">{{ event.name }}</span>
             <span class="events-other-detail">{{ event.time }} · {{ event.day }}/{{ event.month }}/{{ event.year }}</span>
             <span class="events-other-location">{{ event.location }}</span>
-            <a :href="event.mapLink" target="_blank" rel="noopener noreferrer" class="events-other-link">Chỉ đường</a>
           </div>
         </div>
       </div>
@@ -45,8 +44,8 @@
 <script>
 const OTHER_ADDRESS = 'Số 169, Đường Liên Thôn 2, xã Ô Diên, Hà Nội'
 const OTHER_MAP_LINK = 'https://www.google.com/maps?q=' + encodeURIComponent(OTHER_ADDRESS)
-const RECEPTION_ADDRESS = 'Nhà văn hoá cụm 1 Số 12, Đường Liên Thôn 2, xã Ô Diên, Hà Nội'
-const RECEPTION_MAP_LINK = 'https://www.google.com/maps?q=' + encodeURIComponent(RECEPTION_ADDRESS)
+const RECEPTION_ADDRESS = 'Nhà văn hoá cụm 1, Đường Liên Thôn 2, xã Ô Diên, Hà Nội'
+const RECEPTION_MAP_LINK = 'https://www.google.com/maps/place/21%C2%B006\'20.2%22N+105%C2%B043\'29.3%22E/@21.1054497,105.7241295,309m/data=!3m1!1e3!4m4!3m3!8m2!3d21.105621!4d105.724818?entry=ttu&g_ep=EgoyMDI2MDIxOC4wIKXMDSoASAFQAw%3D%3D'
 
 export default {
   name: 'EventsSection',
@@ -57,7 +56,7 @@ export default {
     return {
       events: [
         {
-          name: 'Ăn hỏi',
+          name: 'Lễ Ăn Hỏi',
           time: '09:00',
           day: '11',
           month: '3',
@@ -67,7 +66,7 @@ export default {
           isReception: false
         },
         {
-          name: 'Đón dâu',
+          name: 'Lễ Vu Quy',
           time: '13:30',
           day: '12',
           month: '3',
@@ -77,13 +76,14 @@ export default {
           isReception: false
         },
         {
+          name: 'Lễ Thành Hôn',
           time: '14:00',
           day: '12',
           month: '3',
           year: '2026',
           location: 'Số 1, Ngõ 161, đường Ô Diên, xã Ô Diên, Hà Nội',
           mapLink: 'https://maps.app.goo.gl/Qw9UosWsyVd9yfd87',
-          isReception: true
+          isReception: false
         }
       ]
     }
