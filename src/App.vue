@@ -59,9 +59,6 @@ export default {
     return {
       opened: false,
       openedAt: null,
-      slowScrollCancelled: false,
-      slowScrollTimerId: null,
-      slowScrollCleanup: null,
       guestName: ''
     }
   },
@@ -104,7 +101,6 @@ export default {
     openInvitation() {
       this.opened = true
       this.openedAt = Date.now()
-      this.slowScrollCancelled = false
       this.$nextTick(() => {
         if (typeof window !== 'undefined') {
           window.scrollTo(0, 0)
@@ -112,59 +108,8 @@ export default {
             window.AOS.refresh()
             setTimeout(() => window.AOS.refresh(), 200)
           }
-          setTimeout(() => this.startSlowScroll(), 1200)
         }
       })
-    },
-    startSlowScroll() {
-      if (typeof window === 'undefined') return
-      const vm = this
-
-      window.scrollTo(0, 0)
-      document.documentElement.scrollTop = 0
-      document.body.scrollTop = 0
-
-      const maxScroll = () => Math.max(0, document.documentElement.scrollHeight - window.innerHeight)
-      const stepPx = 2.5
-      const intervalMs = 40
-
-      const stopScroll = () => {
-        vm.slowScrollCancelled = true
-        if (vm.slowScrollTimerId) {
-          clearInterval(vm.slowScrollTimerId)
-          vm.slowScrollTimerId = null
-        }
-        if (vm.slowScrollCleanup) {
-          vm.slowScrollCleanup()
-          vm.slowScrollCleanup = null
-        }
-      }
-
-      const onWheel = () => stopScroll()
-      const onTouchStart = () => stopScroll()
-      window.addEventListener('wheel', onWheel, { passive: true })
-      window.addEventListener('touchstart', onTouchStart, { passive: true })
-      vm.slowScrollCleanup = () => {
-        window.removeEventListener('wheel', onWheel)
-        window.removeEventListener('touchstart', onTouchStart)
-      }
-
-      vm.slowScrollTimerId = setInterval(() => {
-        if (vm.slowScrollCancelled) {
-          stopScroll()
-          return
-        }
-        const current = window.scrollY || document.documentElement.scrollTop
-        const target = maxScroll()
-        if (current >= target) {
-          stopScroll()
-          return
-        }
-        const next = Math.min(current + stepPx, target)
-        window.scrollTo(0, next)
-        document.documentElement.scrollTop = next
-        document.body.scrollTop = next
-      }, intervalMs)
     }
   }
 }
