@@ -19,7 +19,7 @@
             title="Bản đồ địa điểm tiệc cưới"
           ></iframe>
           <a
-            :href="receptionEvent.mapLink"
+            :href="mapDirectionsLink"
             target="_blank"
             rel="noopener noreferrer"
             class="events-map-directions"
@@ -46,6 +46,7 @@ const OTHER_ADDRESS = 'Số 169, Đường Liên Thôn 2, xã Ô Diên, Hà Nộ
 const OTHER_MAP_LINK = 'https://www.google.com/maps?q=' + encodeURIComponent(OTHER_ADDRESS)
 const RECEPTION_ADDRESS = 'Nhà văn hoá cụm 1, Đường Liên Thôn 2, xã Ô Diên, Hà Nội'
 const RECEPTION_MAP_LINK = 'https://www.google.com/maps/place/21%C2%B006\'20.2%22N+105%C2%B043\'29.3%22E/@21.1054497,105.7241295,309m/data=!3m1!1e3!4m4!3m3!8m2!3d21.105621!4d105.724818?entry=ttu&g_ep=EgoyMDI2MDIxOC4wIKXMDSoASAFQAw%3D%3D'
+const BRIDE_MAP_LINK = 'https://maps.app.goo.gl/C2YSrn1nrjwqLmXV6' /* /wedding - nhà gái */
 
 export default {
   name: 'EventsSection',
@@ -89,11 +90,18 @@ export default {
     }
   },
   computed: {
+    isBridePage() {
+      const p = (this.$route?.path ?? '') || (typeof window !== 'undefined' ? window.location.pathname : '')
+      return p === '/wedding' || p.startsWith('/wedding/')
+    },
+    mapDirectionsLink() {
+      return this.isBridePage ? BRIDE_MAP_LINK : (this.receptionEvent?.mapLink || RECEPTION_MAP_LINK)
+    },
     receptionEvent() {
       const e = this.events.find(x => x.isReception)
       if (!e) return this.events[this.events.length - 1]
-      if (this.isBrideVariant) {
-        return { ...e, venueName: e.venueName || e.name, location: RECEPTION_ADDRESS, mapLink: RECEPTION_MAP_LINK }
+      if (this.isBridePage) {
+        return { ...e, venueName: e.venueName || e.name, location: RECEPTION_ADDRESS, mapLink: BRIDE_MAP_LINK }
       }
       return { ...e, venueName: e.venueName || e.name }
     },

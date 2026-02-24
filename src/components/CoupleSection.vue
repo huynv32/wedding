@@ -1,7 +1,7 @@
 <template>
-  <div id="introduction" class="relative" data-aos="fade-up" data-aos-delay="100">
-    <div class="relative">
-      <section class="relative mx-auto" style="background: var(--bg-color);">
+  <div id="introduction" class="relative overflow-x-hidden" data-aos="fade-up" data-aos-delay="100">
+    <div class="relative overflow-x-hidden">
+      <section class="relative mx-auto overflow-x-hidden" style="background: var(--bg-color);">
         <div class="absolute left-0 top-0 w-full h-[574px]" style="background: var(--bg-color);">
           <h1 class="hidden md:block absolute top-1/3 text-[110px] font-prata rotate-90" style="color: var(--secondary-color);left: -9%;">GROOM</h1>
         </div>
@@ -20,7 +20,7 @@
               loading="lazy"
               alt="decoration"
             >
-            <div class="bride-photo-wrap overflow-hidden cursor-pointer relative border-[1px] rounded-t-[300px] md:mt-0 mt-5 md:max-w-[500px] mx-auto block w-full h-[400px] md:h-[600px] z-1" style="border-color: var(--primary-color); padding: 0px;border-style: solid;" data-aos="zoom-in" data-aos-duration="600" data-aos-delay="150">
+            <div class="bride-photo-wrap overflow-hidden cursor-pointer relative border-[1px] rounded-t-[300px] md:mt-0 mt-5 md:max-w-[500px] mx-auto block w-full h-[600px] md:h-[600px] z-1" style="border-color: var(--primary-color); padding: 0px;border-style: solid;" data-aos="zoom-in" data-aos-duration="600" data-aos-delay="150">
               <img 
                 class="w-full h-full z-10 object-cover border-transparent" 
                 :src="imgBride" 
@@ -72,7 +72,7 @@
               loading="lazy"
               alt="decoration"
             >
-            <div class="groom-photo-wrap overflow-hidden cursor-pointer relative border-[1px] rounded-t-[300px] md:mt-0 md:max-w-[500px] mx-auto block w-full h-[400px] md:h-[600px] z-1" style="border-color: var(--primary-color); padding: 0px;border-style: solid;" data-aos="zoom-in" data-aos-duration="600" data-aos-delay="150">
+            <div class="groom-photo-wrap overflow-hidden cursor-pointer relative border-[1px] rounded-t-[300px] md:mt-0 md:max-w-[420px] mx-auto block w-full max-w-[85%] h-[600px] md:h-[600px] z-1" style="border-color: var(--primary-color); padding: 0px;border-style: solid;" data-aos="zoom-in" data-aos-duration="600" data-aos-delay="150">
               <img 
                 class="w-full h-full z-10 object-cover border-transparent" 
                 :src="imgGroom" 
@@ -140,9 +140,18 @@ export default {
 </script>
 
 <style scoped>
-/* Overlay khi hover vào ảnh chú rể */
-.groom-photo-wrap {
+.groom-photo-wrap,
+.bride-photo-wrap {
   position: relative;
+}
+
+.bride-photo-wrap img,
+.groom-photo-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 .groom-hover-overlay {
   position: absolute;

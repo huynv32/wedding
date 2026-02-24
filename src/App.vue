@@ -1,5 +1,5 @@
 <template>
-  <div class="app-wrap">
+  <div class="app-wrap overflow-x-hidden">
     <!-- Trang thiệp: hiện trước, ấn "Mở thiệp" mới vào trang chủ -->
     <InvitationLanding
       v-if="!opened"
