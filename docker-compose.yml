@@ -1,0 +1,26 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: wedding-nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: wedding-backend
+    expose:
+      - "3001"
+    volumes:
+      - guestbook-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  guestbook-data:
+    driver: local
