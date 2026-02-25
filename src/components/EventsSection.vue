@@ -42,9 +42,9 @@
 </template>
 
 <script>
-const OTHER_ADDRESS = 'Số 169, Đường Liên Thôn 2, xã Ô Diên, Hà Nội'
+const OTHER_ADDRESS = 'Số 69, Đường Liên Thôn 2, Liên Trung, Xã Ô Diên, Hà Nội'
 const OTHER_MAP_LINK = 'https://www.google.com/maps?q=' + encodeURIComponent(OTHER_ADDRESS)
-const RECEPTION_ADDRESS = 'Nhà văn hoá cụm 1, Đường Liên Thôn 2, xã Ô Diên, Hà Nội'
+const RECEPTION_ADDRESS = 'Nhà văn hoá cụm 2, Liên Trung, Xã Ô Diên, Hà Nội'
 const RECEPTION_MAP_LINK = 'https://www.google.com/maps/place/21%C2%B006\'20.2%22N+105%C2%B043\'29.3%22E/@21.1054497,105.7241295,309m/data=!3m1!1e3!4m4!3m3!8m2!3d21.105621!4d105.724818?entry=ttu&g_ep=EgoyMDI2MDIxOC4wIKXMDSoASAFQAw%3D%3D'
 const BRIDE_MAP_LINK = 'https://maps.app.goo.gl/C2YSrn1nrjwqLmXV6' /* /wedding - nhà gái */
 

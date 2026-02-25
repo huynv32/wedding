@@ -56,10 +56,10 @@
 <script>
 /** Thiệp chú rể (lễ thành hôn): tiệc và lễ thành hôn đều ở Số 1, Ngõ 161 */
 const GROOM_ADDRESS = 'Số 1, Ngõ 161, đường Ô Diên, xã Ô Diên, Hà Nội'
-/** Thiệp cô dâu: Lễ vu quy và Ăn hỏi, Đón dâu ở Số 169 */
-const OTHER_ADDRESS = 'Số 169, Đường Liên Thôn 2, xã Ô Diên, Hà Nội'
+/** Thiệp cô dâu: Lễ vu quy và Ăn hỏi, Đón dâu ở Số 69 */
+const OTHER_ADDRESS = 'Số 69, Đường Liên Thôn 2, Liên Trung, Xã Ô Diên, Hà Nội'
 /** Thiệp cô dâu: chỉ tiệc chiều ở Nhà văn hoá */
-const RECEPTION_ADDRESS = 'Nhà văn hoá cụm 1 Số 12, Đường Liên Thôn 2, xã Ô Diên, Hà Nội'
+const RECEPTION_ADDRESS = 'Nhà văn hoá cụm 2, Liên Trung, Xã Ô Diên, Hà Nội'
 
 export default {
   name: 'CeremonySection',
