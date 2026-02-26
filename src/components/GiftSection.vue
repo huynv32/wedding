@@ -205,7 +205,7 @@ export default {
   name: 'GiftSection',
   data() {
     return {
-      imgBride: '/assets/DSC00948.jpg',
+      imgBride: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/39f05e57-3333-43ca-349b-5d73755ea500/full',
       envelopeImg: '/assets/envelope-li-xi.png',
       qr1: '/assets/qr1.png',
       qr2: '/assets/qr2.jpeg',

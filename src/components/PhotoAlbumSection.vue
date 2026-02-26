@@ -54,48 +54,48 @@ export default {
       currentIndex: 0,
       photos: [
         {
-          thumbnail: '/assets/DSC00950.jpg',
-          full: '/assets/DSC00950.jpg',
+          thumbnail: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/ccbf37ca-3a5b-42d4-90e7-e635a2d3c900/full',
+          full: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/ccbf37ca-3a5b-42d4-90e7-e635a2d3c900/full',
           alt: 'Wedding photo 1'
         },
         {
-          thumbnail: '/assets/DSC01613.jpg',
-          full: '/assets/DSC01613.jpg',
+          thumbnail: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/3fbe181d-abdc-4ce5-1197-9b132b912500/full',
+          full: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/3fbe181d-abdc-4ce5-1197-9b132b912500/full',
           alt: 'Wedding photo 2'
         },
         {
-          thumbnail: '/assets/DSC01239.jpg',
-          full: '/assets/DSC01239.jpg',
+          thumbnail: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/25f4819e-c672-4829-00fb-b2fc36325300/full',
+          full: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/25f4819e-c672-4829-00fb-b2fc36325300/full',
           alt: 'Wedding photo 3'
         },
         {
-          thumbnail: '/assets/DSC01901.jpg',
-          full: '/assets/DSC01901.jpg',
+          thumbnail: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/103ea1ea-a2bf-43b4-ed6e-c119b6b35f00/full',
+          full: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/103ea1ea-a2bf-43b4-ed6e-c119b6b35f00/full',
           alt: 'Wedding photo 4'
         },
         {
-          thumbnail: '/assets/DSC01516.jpg',
-          full: '/assets/DSC01516.jpg',
+          thumbnail: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/790d01b3-2a66-4e62-074a-1f498278e200/full',
+          full: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/790d01b3-2a66-4e62-074a-1f498278e200/full',
           alt: 'Wedding photo 5'
         },
         {
-          thumbnail: '/assets/DSC01077.jpg',
-          full: '/assets/DSC01077.jpg',
+          thumbnail: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/527ae6e4-8d84-4659-ee76-af9a89caf700/full',
+          full: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/527ae6e4-8d84-4659-ee76-af9a89caf700/full',
           alt: 'Wedding photo 6'
         },
         {
-          thumbnail: '/assets/DSC01739.jpg',
-          full: '/assets/DSC01739.jpg',
+          thumbnail: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/cd0f40b6-7c89-4256-128f-ffed79fdf700/full',
+          full: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/cd0f40b6-7c89-4256-128f-ffed79fdf700/full',
           alt: 'Wedding photo 7'
         },
         {
-          thumbnail: '/assets/DSC01157.jpg',
-          full: '/assets/DSC01157.jpg',
+          thumbnail: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/8044a772-46b3-4e66-1dd5-05e808b6e200/full',
+          full: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/8044a772-46b3-4e66-1dd5-05e808b6e200/full',
           alt: 'Wedding photo 8'
         },
         {
-          thumbnail: '/assets/DSC01350.jpg',
-          full: '/assets/DSC01350.jpg',
+          thumbnail: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/1448aefe-7b97-4619-0a86-449057d9bc00/full',
+          full: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/1448aefe-7b97-4619-0a86-449057d9bc00/full',
           alt: 'Wedding photo 9'
         }
       ]

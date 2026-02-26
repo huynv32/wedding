@@ -74,14 +74,14 @@ export default {
           time: '16:00',
           date: '11/03/2026',
           location: GROOM_ADDRESS,
-          image: '/assets/DSC01350.jpg'
+          image: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/1448aefe-7b97-4619-0a86-449057d9bc00/full'
         },
         {
           name: 'LỄ THÀNH HÔN',
           time: '13:00',
           date: '12/03/2026',
           location: GROOM_ADDRESS,
-          image: '/assets/DSC01794.jpg'
+          image: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/02acc5f2-3e6e-4d34-18dc-4f7cd964dc00/full'
         }
       ]
     }

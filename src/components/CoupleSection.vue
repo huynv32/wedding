@@ -124,8 +124,8 @@ export default {
   name: 'CoupleSection',
   data() {
     return {
-      imgBride: '/assets/DSC01519.jpg',
-      imgGroom: '/assets/DSC01582.jpg',
+      imgBride: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/bf477747-1de1-49d8-f8c1-c3ab04d76600/full',
+      imgGroom: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/d5389ad7-c2f7-4787-663c-8ae347520200/full',
       showGroomModal: false,
       showBrideModal: false,
       groomName: 'VĂN HUY',

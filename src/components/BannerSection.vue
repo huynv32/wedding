@@ -90,8 +90,8 @@ export default {
   },
   data() {
     return {
-      imgCouple: '/assets/DSC00948.jpg',
-      imgCoupleSecondary: '/assets/DSC01819.jpg',
+      imgCouple: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/39f05e57-3333-43ca-349b-5d73755ea500/full',
+      imgCoupleSecondary: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/b403e51d-8534-4f0f-ea80-b6bbe00c4e00/full',
       playEntrance: false
     }
   },

@@ -52,7 +52,7 @@ export default {
   },
   data() {
     return {
-      imgStory: '/assets/DSC01492.jpg',
+      imgStory: 'https://imagedelivery.net/Vqc0CGAmwkbNdOz96KFZgQ/4e640426-625f-4658-99ee-e2d255365700/full',
       playEntrance: false
     }
   },
